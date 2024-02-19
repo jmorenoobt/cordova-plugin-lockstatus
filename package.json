@@ -1,0 +1,22 @@
+{
+  "name": "cordova-plugin-lockstatus",
+  "version": "0.0.1",
+  "description": "Cordova LockStatus Plugin",
+  "cordova": {
+    "id": "cordova-plugin-lockstatus",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmorenoobt/cordova-plugin-lockstatus.git"
+  },
+  "keywords": [
+    "cordova",
+    "lockstatus",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "license": "MIT"
+}
