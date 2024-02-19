@@ -23,7 +23,7 @@
       <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     </config-file> -->
 
-    <source-file src="src/android/LockStatusPlugin.java" target-dir="src/com/onebittech/LockStatusPlugin/" />
+    <source-file src="src/android/com/onebittech/LockStatusPlugin.java" target-dir="src/com/onebittech/LockStatusPlugin/" />
   </platform>
 
 </plugin>
