@@ -1,16 +1,27 @@
-package com.onebittech.LockStatusPlugin;
+package com.onebittech;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import android.app.Activity;
+import org.json.JSONException;
+import android.content.Context;
+import androidx.core.content.ContextCompat;
 
 import android.app.KeyguardManager;
 
 public class LockStatusPlugin extends CordovaPlugin {
+
+    private CordovaInterface cordova;
+
+    @Override
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        this.cordova = cordova;
+        super.initialize(cordova, webView);
+    }
 
     /*
      * (non-Javadoc)
@@ -19,43 +30,31 @@ public class LockStatusPlugin extends CordovaPlugin {
      * org.json.JSONArray, java.lang.String)
      */
     @Override
-    public boolean execute(String action, JSONArray args,
-            CallbackContext callbackContext) {
-
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("isDeviceLocked")) {
-
             Boolean isLocked = this.isDeviceLocked();
 
             if (isLocked != null) {
-                JSONObject JSONresult = new JSONObject();
-                try {
-                    JSONresult.put("is_device_locked", isLocked);
-                    PluginResult r = new PluginResult(PluginResult.Status.OK,
-                            JSONresult);
-                    callbackContext.success(isLocked);
-                    r.setKeepCallback(true);
-                    callbackContext.sendPluginResult(r);
-                    return true;
-                } catch (JSONException jsonEx) {
-                    PluginResult r = new PluginResult(
-                            PluginResult.Status.JSON_EXCEPTION);
-                    callbackContext.error("error");
-                    r.setKeepCallback(true);
-                    callbackContext.sendPluginResult(r);
-                    return true;
-                }
+                JSONObject output = new JSONObject();
+                output.put("is_device_locked", isLocked);
+                callbackContext.success(output);
+                return true;
             }
+            callbackContext.error("error retrieving lock status");
+            return false;
         }
+        callbackContext.error("unknown action");
         return false;
     }
 
     /**
-     * Gets the mac address.
+     * Gets the device's lock status.
      *
-     * @return the mac address
+     * @return device locked true | false
      */
     private Boolean isDeviceLocked() {
-        KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Activity.KEYGUARD_SERVICE);
+        KeyguardManager keyguardManager = ContextCompat.getSystemService(cordova.getContext(), KeyguardManager.class);
+        System.out.println(keyguardManager.isDeviceLocked());
         return keyguardManager.isDeviceLocked();
     }
 }

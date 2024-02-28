@@ -2,14 +2,14 @@
 
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-lockstatus" version="0.0.1">
-  <name>LockStatus</name>
+  <name>LockStatusPlugin</name>
   <description>Cordova LockStatus Plugin</description>
   <license>Apache 2.0</license>
   <keywords>cordova,lockstatus</keywords>
 
 
-  <js-module src="www/LockStatus.js" name="LockStatus">
-    <clobbers target="window.LockStatus" />
+  <js-module src="www/LockStatusPlugin.js" name="LockStatusPlugin">
+    <clobbers target="LockStatusPlugin" />
   </js-module>
 
   <!-- android -->
@@ -19,11 +19,8 @@
         <param name="android-package" value="com.onebittech.LockStatusPlugin"/>
       </feature>
     </config-file>
-    <!-- <config-file target="AndroidManifest.xml" parent="/*">
-      <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    </config-file> -->
 
-    <source-file src="src/android/com/onebittech/LockStatusPlugin.java" target-dir="src/com/onebittech/LockStatusPlugin/" />
+    <source-file src="src/android/com/onebittech/LockStatusPlugin.java" target-dir="src/com/onebittech" />
   </platform>
 
 </plugin>
