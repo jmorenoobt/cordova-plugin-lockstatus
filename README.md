@@ -12,9 +12,14 @@ cordova plugin add cordova-plugin-lockstatus
 **Example Usage:**
 
 ```js
-window.LocStatus.isDeviceLocked(
-function(result) {return result;},function(fail) {return fail;}
-);
+window.LockStatusPlugin.isDeviceLocked(
+    (status) => {
+        console.log(status)
+    },
+    (error) => {
+        console.log(error)
+    },
+)
 ```
 
 ## MIT Licence
